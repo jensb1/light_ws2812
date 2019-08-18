@@ -1,7 +1,7 @@
 /*
-* light weight WS2812 lib V2.1 - Arduino support
+* light weight light_WS2812 lib V2.1 - Arduino support
 *
-* Controls WS2811/WS2812/WS2812B RGB-LEDs
+* Controls WS2811/light_WS2812/light_WS2812B RGB-LEDs
 * Author: Tim (cpldcpu@gmail.com)
 *
 * Jan  18th, 2014  v2.0b Initial Version
@@ -50,9 +50,9 @@
 // Warn or throw error if this timing can not be met with current F_CPU settings.
 #define w_lowtime ((w1_nops+w_fixedlow)*1000000)/(F_CPU/1000)
 #if w_lowtime>550
-   #error "Light_ws2812: Sorry, the clock speed is too low. Did you set F_CPU correctly?"
+   #error "Light_light_WS2812: Sorry, the clock speed is too low. Did you set F_CPU correctly?"
 #elif w_lowtime>450
-   #warning "Light_ws2812: The timing is critical and may only work on WS2812B, not on WS2812(S)."
+   #warning "Light_light_WS2812: The timing is critical and may only work on light_WS2812B, not on light_WS2812(S)."
    #warning "Please consider a higher clockspeed, if possible"
 #endif   
 
@@ -74,7 +74,7 @@
 #define w_nop8  w_nop4 w_nop4
 #define w_nop16 w_nop8 w_nop8
 
-void  WS2812::ws2812_sendarray_mask(uint8_t *data,uint16_t datlen,uint8_t maskhi,uint8_t *port, uint8_t *portreg)
+void  light_WS2812::light_WS2812_sendarray_mask(uint8_t *data,uint16_t datlen,uint8_t maskhi,uint8_t *port, uint8_t *portreg)
 {
   uint8_t curbyte,ctr,masklo;
   uint8_t sreg_prev;
@@ -147,7 +147,7 @@ w_nop16
     "       dec   %0    \n\t"    //  '1' [+4] '0' [+3]
     "       brne  loop%=\n\t"    //  '1' [+5] '0' [+4]
     :	"=&d" (ctr)
-//    :	"r" (curbyte), "I" (_SFR_IO_ADDR(ws2812_PORTREG)), "r" (maskhi), "r" (masklo)
+//    :	"r" (curbyte), "I" (_SFR_IO_ADDR(light_WS2812_PORTREG)), "r" (maskhi), "r" (masklo)
     :	"r" (curbyte), "x" (port), "r" (maskhi), "r" (masklo)
     );
   }
